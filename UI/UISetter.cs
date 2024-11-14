@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class UISetter : MonoBehaviour
+public static class UISetter
 {
     #region CONSTANTS
     private const string Console_Holder = "Console-Holder";
@@ -161,5 +161,22 @@ public class UISetter : MonoBehaviour
     {
         SOListToAdd.Remove(item);
         AddActions<ActionsSO>(scrollViewToAdd, SOListToAdd, Strategy);
+    }
+
+    public static void PutInConsole(List<string> list, ScrollView ScrollViewConsole, VisualTreeAsset ConsolePlaceHolder)
+    {
+        //ScrollViewConsole.Clear();
+
+        foreach (var text in list)
+        {
+            VisualElement ConsoleElement = ConsolePlaceHolder.CloneTree();
+            Label label = ConsoleElement.Q<Label>("Console_content_placeholder");
+            label.text = text;
+            label.style.color = Color.white;
+            label.RegisterCallback<MouseEnterEvent>(evt => {label.style.color = Color.yellow;});
+            label.RegisterCallback<MouseLeaveEvent>(evt => {label.style.color = Color.white;});
+
+            ScrollViewConsole.Add(label);
+        }
     }
 }

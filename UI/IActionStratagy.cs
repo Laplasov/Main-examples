@@ -85,3 +85,12 @@ public class ActionStashStrategy : IActionStrategy
 
     }
 }
+public class ButtleActionStrategy : IActionStrategy
+{
+    public ActionContext Context { get; set; }
+
+    public void HandleAction(ActionsSO ActionSO, ScrollView scrollViewToAdd, VisualElement Destroid, Label Broken, string ExitSymbol, string Durability, VisualElement actionElement)
+    {
+        Destroid.style.display = DisplayStyle.None;
+    }
+}
